@@ -22,7 +22,7 @@ const server = app.listen(port, () => {
 //attach our chat server to our app
 io.attach(server);
 
-io.on('connection'), function(socket) {
+io.on('connection', function(socket) {
 
     console.log('a user has connected');
     socket.emit('connected', {sID:  socket.id, message: "new connection"});
@@ -30,4 +30,4 @@ io.on('connection'), function(socket) {
     socket.on('disconnect', function() {
         console.log('a user has disconnected');
     })
-}
+})
