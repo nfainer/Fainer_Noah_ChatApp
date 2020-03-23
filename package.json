@@ -1,13 +1,21 @@
 {
-  "name": "vanrys_t_chatapp",
+  "name": "fainer_noah_chatapp",
   "version": "1.0.0",
-  "description": "social media app ",
+  "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "TVR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfainer/Fainer_Noah_ChatApp.git"
+  },
+  "author": "noah fainer",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nfainer/Fainer_Noah_ChatApp/issues"
+  },
+  "homepage": "https://github.com/nfainer/Fainer_Noah_ChatApp#readme",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.3.0"

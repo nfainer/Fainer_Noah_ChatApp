@@ -1,6 +1,7 @@
 // imports always go first - if we're importing anything
 
 import ChatMessage from "./modules/ChatMessage.js";
+import greetMessage from "./modules/greetMessage.js";
 
 
 const socket = io();
@@ -24,8 +25,13 @@ function appendMessage(message) {
     vm.messages.push(message);
 }
 
+function showGreetMsg(nickname){
+    vm.messages.push(nickname)
+}
+
 
 const vm = new Vue({
+
     data: {
         socketID: "",
         message: "",
@@ -44,12 +50,23 @@ const vm = new Vue({
             // if the first value is set, use it. else use
             // whatever comes after the "or" operator
             socket.emit('chat_message', {
+                name: this.nickname || "anonymous",
+                content: this.message
 
-                content: this.message,
-                name: this.nickname || "anonymous"
             })
 
             this.message = "";
+        },
+
+        submitNickname(){
+            console.log('nickname button clicked');
+
+            socket.emit('new_user', {
+                name: this.nickname,
+            })
+
+            document.querySelector('.bg-modal').classList.add('hidden');
+    
         }
     },
 
@@ -58,7 +75,8 @@ const vm = new Vue({
     },
 
     components: {
-        newmessage: ChatMessage
+        newmessage: ChatMessage,
+        greetmsg: greetMessage
     }
 
 }).$mount('#app');
@@ -66,3 +84,4 @@ const vm = new Vue({
 socket.addEventListener('connected', setUserId);
 socket.addEventListener('disconnect', showDisconnectMessage);
 socket.addEventListener('new_message', appendMessage);
+socket.addEventListener('greeting', showGreetMsg);
