@@ -6,9 +6,8 @@ export default {
 
     template: `
     
-        <p class="new-message slideInRight" :class="{'my-message' : matchedID}">
-            <span>{{ msg.message.name }} says:</span>
-            {{msg.message.content}}
+        <p class="new-message bounceIn" :class="{'my-message' : matchedID}">
+            <span>{{ msg.message.name }} has joined the chat room</span>
         </p>
     
     `,

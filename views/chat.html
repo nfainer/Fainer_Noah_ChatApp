@@ -3,16 +3,26 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Socket IO Chat with Node!</title>
+	<title>Noah's Chat App</title>
 	<link rel="stylesheet" href="css/main.css">
 	<script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
 	<main id="app">
+
+		<div class="bg-modal">
+			<div class="modal-content">
+				<form action="">
+					<label for="nickname">Your Nickname (optional)</label>
+					<input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
+					<button @click.prevent="submitNickname">Submit</button>
+				</form>
+			</div>
+		</div>
+
 		<section class="form-container">
-			<label for="nickname">Your Nickname (optional)</label>
-			<input v-model="nickname" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
+
 
 			<form>
 				<label for="message">Something to say?</label>
@@ -24,12 +34,14 @@
 		<section class="messages">
 			<ul id="messages">
 				<!-- render a new message component for every message -->
+				<greetmsg v-for="message in messages" :msg="message"></greetmsg>
 				<newmessage v-for="message in messages" :msg="message"></newmessage>
 			</ul>
 		</section>
 	</main>
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="module" src="js/main_vm.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.5/gsap.min.js"></script>
 </body>
 
 </html>

@@ -9,8 +9,9 @@ const port = process.env.PORT || 3000;
 // tell express where our static files are (js, images, css etc)
 app.use(express.static('public'));
 
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/views/chat.html');
 });
 
 
@@ -26,6 +27,7 @@ io.on('connection', function(socket) {
 
     console.log('a user has connected');
     socket.emit('connected', {sID:  socket.id, message: "new connection"});
+  
 
     socket.on('chat_message', function(msg) {
         console.log(msg); // lets see what the payload is from the client side
@@ -34,6 +36,11 @@ io.on('connection', function(socket) {
         //anyone connected to our chat app will get this message (including the sender)
         io.emit('new_message', {id: socket.id, message: msg});
     })
+
+    socket.on('new_user', function(name){
+        io.emit('greeting', {id: socket.id, message: name});
+    })
+
 
     socket.on('disconnect', function() {
         console.log('a user has disconnected');
