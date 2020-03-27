@@ -62,7 +62,7 @@ const vm = new Vue({
             console.log('nickname button clicked');
 
             socket.emit('new_user', {
-                name: this.nickname,
+                name: this.nickname || "anonymous",
             })
 
             document.querySelector('.bg-modal').classList.add('hidden');
